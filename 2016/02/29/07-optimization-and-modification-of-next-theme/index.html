@@ -1,0 +1,733 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo,Next,Modify" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="我的Hexo博客选用了Next主题，但是其外观效果不是很令我满意；可以通过修改主题的CSS来来达到想要的效果，同时也进一步学习了CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NexT主题的优化与修改">
+<meta property="og:url" content="http://yoursite.com/2016/02/29/07-optimization-and-modification-of-next-theme/index.html">
+<meta property="og:site_name" content="BlueWinters">
+<meta property="og:description" content="我的Hexo博客选用了Next主题，但是其外观效果不是很令我满意；可以通过修改主题的CSS来来达到想要的效果，同时也进一步学习了CSS">
+<meta property="og:updated_time" content="2016-02-29T05:46:11.957Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NexT主题的优化与修改">
+<meta name="twitter:description" content="我的Hexo博客选用了Next主题，但是其外观效果不是很令我满意；可以通过修改主题的CSS来来达到想要的效果，同时也进一步学习了CSS">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> NexT主题的优化与修改 | BlueWinters </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">BlueWinters</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                NexT主题的优化与修改
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-29T13:24:45+08:00" content="2016-02-29">
+              2016-02-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Blog/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="修改需求"><a href="#修改需求" class="headerlink" title="修改需求"></a><strong>修改需求</strong></h1><p>Next主题当中还内置了scheme（说明文档译为“样式”，然而并不想这么称呼，原因是可能会和后面CSS所代表的“样式”混淆），以实现“主题内的主题”。处于个人喜好，我采用的是Mist，因为相对其他两个scheme而言，Mist页面更加简洁。但是使用过程中总是对当前Mist的配色不是很满意，加之这类框架比较简单，于是萌生了修改主题的想法。</p>
+<h1 id="修改目标"><a href="#修改目标" class="headerlink" title="修改目标"></a><strong>修改目标</strong></h1><p>由于对前端缺乏了解，而且没有这些代码比较详细的说明文档，所以不准备对整个页面做较大幅度的修改，仅限于页面颜色，字体大小等，也想通过修改了解一些基本的前端知识 。</p>
+<a id="more"></a>
+<h1 id="框架的理解"><a href="#框架的理解" class="headerlink" title="框架的理解"></a><strong>框架的理解</strong></h1><p>其实到现在为止我都没有很好的理解代码文件的组织结果，但是有一点，特别是错从复杂的CSS，导致一些修改总是没有任何的用处。然而，在仔细并且反复的看了页面HTML文件后，还是能够找到一些作者意图的一些蛛丝马迹。</p>
+<h2 id="HMTL页面的分布结构"><a href="#HMTL页面的分布结构" class="headerlink" title="HMTL页面的分布结构"></a><strong>HMTL页面的分布结构</strong></h2><p>大体来说，作者通过区域来划分页面，然后通过<a href="http://www.w3school.com.cn/css/css_syntax_class_selector.asp" target="_blank" rel="external">CSS的类选择器</a>来制定页面的样式。具体来说，即header，main，foot这三个标签对应页相应位置的信息。另外，不得不提的是边栏sidebar是属于Main的。<br>当然，相对而言，header和foot的更好理解同时内容也更少，main就比较复杂。但是，通过反复修改CSS的代码发现，基本上属于文章渲染部分的CSS基本上都集中在main标签中一个类名为posts-expand的div子标签中。所以可以想象，如果要针对页面进行修改，就需要通过CSS对posts-expand进行筛选。</p>
+<h2 id="CSS文件的分布"><a href="#CSS文件的分布" class="headerlink" title="CSS文件的分布"></a><strong>CSS文件的分布</strong></h2><p>结合NexT本身带有scheme的这种的设计，我来猜测一下整个CSS文件的设计和分布。<br>所有的CSS文件都在文件夹<code>blog\themes\next\source\css</code>中，其中文件夹<code>_schemes</code>表示对应scheme的CSS，<code>_variables</code>文件夹下的CSS保存了一些例如颜色字体大小等的全局变量，<code>_common</code>包含了所有scheme共同使用的页面当中的CSS。另有有点奇怪的是，所有的CSS文件有以styl为后缀名，当然着并不影响使用。<br>更具体的CSS文件结构理解如下：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 文件夹D:\blog\themes\next\source\css结构</span></span><br><span class="line">├─_common               <span class="comment"># 页面布局公用文件夹</span></span><br><span class="line">│  ├─components</span><br><span class="line">│  │  ├─footer          <span class="comment"># 页脚</span></span><br><span class="line">│  │  ├─header          <span class="comment"># 页头</span></span><br><span class="line">│  │  ├─highlight       <span class="comment"># 代码高亮</span></span><br><span class="line">│  │  ├─pages           <span class="comment"># archinve\tag\about页面相关</span></span><br><span class="line">│  │  ├─post            <span class="comment"># 文章主体</span></span><br><span class="line">│  │  ├─sidebar         <span class="comment"># 边栏</span></span><br><span class="line">│  │  ├─tags            <span class="comment"># 标签</span></span><br><span class="line">│  │  └─third-party     <span class="comment"># 第三方插件</span></span><br><span class="line">│  ├─outline</span><br><span class="line">│  ├─scaffolding</span><br><span class="line">│  ├─_component</span><br><span class="line">│  └─_section</span><br><span class="line">├─_custom</span><br><span class="line">├─_mixins</span><br><span class="line">├─_schemes              <span class="comment"># scheme文件夹</span></span><br><span class="line">│  ├─Mist</span><br><span class="line">│  ├─Muse</span><br><span class="line">│  └─Pisces</span><br><span class="line">├─_variables            <span class="comment"># 全局变量</span></span><br><span class="line">└─main.styl             <span class="comment"># CSS导入</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="修改的建议"><a href="#修改的建议" class="headerlink" title="修改的建议"></a><strong>修改的建议</strong></h2><p>虽然能够猜测的CSS文件的结构分布情况，但是修改了一些CSS之后却发现了另一个无可奈何的现实：针对同样标签CSS代码的不止一处，有些修改有用，有些修改却没有任何效果。<br>当然个人猜测（<strong>这显然是前端知识不足造成的…</strong>），这些重复的CSS代码(是指针对同一标签的)，由于加载顺序不同，或者优先级不同，造成了有些代码是有效的，有些是无效的。<br>不过，经过反复测试，在<code>_schemems\Mist</code>文件夹下进行修改是最为理想的结果，而且一般情况下是有效的。</p>
+<h1 id="作业过程"><a href="#作业过程" class="headerlink" title="作业过程"></a><strong>作业过程</strong></h1><h2 id="Mist文件夹"><a href="#Mist文件夹" class="headerlink" title="Mist文件夹"></a><strong>Mist文件夹</strong></h2><p>首先直接给出<code>_schemems\Mist</code>文件夹的文件：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 文件夹D:\blog\themes\next\source\css\_schemems\Mist结构</span></span><br><span class="line">├─index.styl                <span class="comment"># CSS导入和其他杂项</span></span><br><span class="line">├─_base.styl                <span class="comment"># 杂项？</span></span><br><span class="line">├─_header.styl              <span class="comment"># 页头</span></span><br><span class="line">├─_logo.styl                <span class="comment"># logo</span></span><br><span class="line">├─_menu.styl                <span class="comment"># 菜单栏</span></span><br><span class="line">└─_posts-expanded.styl      <span class="comment"># 文章主体</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="修改文章标题字体大小"><a href="#修改文章标题字体大小" class="headerlink" title="修改文章标题字体大小"></a><strong>修改文章标题字体大小</strong></h2><p>修改文章标题字体的大小可以选择在文件<code>_variables\base.styl</code>中修改，即：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">// Headings font size</span><br><span class="line">$font-size-headings-base = 26px             // 之前是24px</span><br></pre></td></tr></table></figure></p>
+<p>当然最好的方法是只针对Mist来修改，可以在文件<code>_posts-expanded.styl</code>中修改：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">.post-title &#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  font-size: $font-size-headings-base;    // 标题字体大小</span><br><span class="line">  font-weight: bold;                      // 标题加粗</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="更换页头和页脚颜色"><a href="#更换页头和页脚颜色" class="headerlink" title="更换页头和页脚颜色"></a><strong>更换页头和页脚颜色</strong></h2><p>更换<strong>页头颜色</strong>的修改位置位于<code>_header.styl</code>文件中，内容如下：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">// Header</span><br><span class="line">// 之前颜色为$whitesmoke，为了让页头和边栏颜色保持一致才选用$black-deep</span><br><span class="line">.header &#123; background: $black-deep; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然，修改页头颜色别忘记修改页头当中字体和下划线的颜色：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">.site-title &#123; color: white; &#125;               // 额外添加</span><br><span class="line">.logo-line-after i &#123; background: white; &#125;   // 额外添加</span><br></pre></td></tr></table></figure></p>
+<p>由于<code>Mist</code>文件夹下没有<code>_foot.styl</code>文件，故此处有两种方法来更换<strong>页脚颜色</strong>。<br>第一种，相对简单省时，在<code>index.styl</code>文件中存在有foot得相关信息，直接修改即可：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">// Footer</span><br><span class="line">// --------------------------------------------------</span><br><span class="line">.footer &#123;</span><br><span class="line">  margin-top: 80px;</span><br><span class="line">  padding: 20px 0;</span><br><span class="line">  background: $black-deep;      // 背景颜色，之前的值$whitesmoke;</span><br><span class="line">  color: white;                 // 字体颜色，之前的值$grey-dim;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 效果添加</span><br><span class="line">.footer-inner &#123;</span><br><span class="line">  margin: 0 auto;</span><br><span class="line">  text-align: left;</span><br><span class="line">  a &#123; </span><br><span class="line">    color: white;</span><br><span class="line">    text-decoration: none;</span><br><span class="line">    border-bottom: none;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">      border-bottom: 1px solid white;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第二种修改就比较耗费精力，我没去具体测试，但是效果应该没有问题。<br>具体步骤是，首先在<code>Mist</code>文件夹下添加文件<code>foot.styl</code>，并写入<strong>上面的代码</strong>。然后，在<code>index.styl</code>文件中添加对该文件的导入：<br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">import</span> <span class="string">"foot"</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>当然，至于为什么这么做就看个人理解咯。我想，似乎一个习惯比较好的程序员会倾向于后者，因为这样可以<strong>保持整体文件结构的清晰</strong>。在代码量比较少的时候（如我的这个博客）可以选择前者；但是当代码量比较大时，显然后者是更科学的的举措。<br>当然，对于菜单栏的修改类似，这里就省略了。</p>
+<h1 id="一些零碎的CSS知识"><a href="#一些零碎的CSS知识" class="headerlink" title="一些零碎的CSS知识"></a><strong>一些零碎的CSS知识</strong></h1><h2 id="CSS选择器"><a href="#CSS选择器" class="headerlink" title="CSS选择器"></a><strong>CSS选择器</strong></h2><p>看了这么多代码无需多说，最基本方式：点+类名。<br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="class">.center</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> black</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">text-align</span>:<span class="value"> center</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>有一点特别需要留心的是，“派生类选择”。基本形式是：点+类名+标签名。<br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="class">.center</span> <span class="tag">td</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> red</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> black</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>以上更多内容可以参考：<a href="http://www.w3school.com.cn/css/css_selector_class.asp" target="_blank" rel="external">类选择器详解</a></p>
+<h2 id="hover伪类"><a href="#hover伪类" class="headerlink" title="hover伪类"></a><strong>hover伪类</strong></h2><p>hover伪类的解释为：当鼠标指针浮动在某个元素上时，设置其样式。<br>我使用伪类，主要是基于当鼠标放在带有<strong>链接</strong>的文字上时，我需要显示一个下划线。关于这个效果的CSS实现参考代码如下：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">.post-body &#123;</span><br><span class="line">  p &#123;</span><br><span class="line">    a &#123;</span><br><span class="line">        color: blue;                    // 链接的字体颜色为蓝色</span><br><span class="line">        text-decoration: none;          // 文字装饰设置为空</span><br><span class="line">        border-bottom: none;            // 外框底部设置为空</span><br><span class="line">        // 当鼠标放在链接文字上时，外框底部出现一条黑线</span><br><span class="line">        &amp;:hover &#123;</span><br><span class="line">            border-bottom: 1px solid $link-decoration-hover-color;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a><strong>参考资料</strong></h1><p>[1] <a href="http://w3school.com.cn/css/index.asp" target="_blank" rel="external">CSS教程</a><br>[2] <a href="http://blog.csdn.net/draling/article/details/8855520" target="_blank" rel="external">CMD生成文件夹目录结构</a><br>[3] <a href="http://w3school.com.cn/cssref/pr_pseudo_hover.asp" target="_blank" rel="external">hover伪类</a><br>[4] <a href="http://www.w3school.com.cn/css/css_selector_class.asp" target="_blank" rel="external">类选择器详解</a></p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+          
+            <a href="/tags/Next/" rel="tag">#Next</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/19/06-notes-of-hexo-2/" rel="next" title="Hexo使用笔记(二)">
+                <i class="fa fa-chevron-left"></i> Hexo使用笔记(二)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="Winters" />
+          <p class="site-author-name" itemprop="name">Winters</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#修改需求"><span class="nav-number">1.</span> <span class="nav-text">修改需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改目标"><span class="nav-number">2.</span> <span class="nav-text">修改目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#框架的理解"><span class="nav-number">3.</span> <span class="nav-text">框架的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HMTL页面的分布结构"><span class="nav-number">3.1.</span> <span class="nav-text">HMTL页面的分布结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS文件的分布"><span class="nav-number">3.2.</span> <span class="nav-text">CSS文件的分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改的建议"><span class="nav-number">3.3.</span> <span class="nav-text">修改的建议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作业过程"><span class="nav-number">4.</span> <span class="nav-text">作业过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mist文件夹"><span class="nav-number">4.1.</span> <span class="nav-text">Mist文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改文章标题字体大小"><span class="nav-number">4.2.</span> <span class="nav-text">修改文章标题字体大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换页头和页脚颜色"><span class="nav-number">4.3.</span> <span class="nav-text">更换页头和页脚颜色</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些零碎的CSS知识"><span class="nav-number">5.</span> <span class="nav-text">一些零碎的CSS知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS选择器"><span class="nav-number">5.1.</span> <span class="nav-text">CSS选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hover伪类"><span class="nav-number">5.2.</span> <span class="nav-text">hover伪类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Winters</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>

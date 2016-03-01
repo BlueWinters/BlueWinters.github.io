@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Hexo" />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="This is a file just for test.">
+<meta name="description" content="Hexo常用命令，Hexo页面中文乱码与tags页面异常">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Just For Test">
-<meta property="og:url" content="http://yoursite.com/2016/01/21/for-test/index.html">
+<meta property="og:title" content="Hexo使用笔记(一)">
+<meta property="og:url" content="http://yoursite.com/2016/02/05/03-notes-of-heox-1/index.html">
 <meta property="og:site_name" content="BlueWinters">
-<meta property="og:description" content="This is a file just for test.">
-<meta property="og:updated_time" content="2016-02-05T12:26:08.228Z">
+<meta property="og:description" content="Hexo常用命令，Hexo页面中文乱码与tags页面异常">
+<meta property="og:updated_time" content="2016-02-29T05:52:46.521Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Just For Test">
-<meta name="twitter:description" content="This is a file just for test.">
+<meta name="twitter:title" content="Hexo使用笔记(一)">
+<meta name="twitter:description" content="Hexo常用命令，Hexo页面中文乱码与tags页面异常">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> Just For Test | BlueWinters </title>
+  <title> Hexo使用笔记(一) | BlueWinters </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -214,7 +214,7 @@
             
             
               
-                Just For Test
+                Hexo使用笔记(一)
               
             
           </h1>
@@ -226,8 +226,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-21T15:36:34+08:00" content="2016-01-21">
-              2016-01-21
+            <time itemprop="dateCreated" datetime="2016-02-05T22:02:17+08:00" content="2016-02-05">
+              2016-02-05
             </time>
           </span>
 
@@ -271,24 +271,37 @@
       
 
       
-        <p>This is a file just for test.<br><a id="more"></a></p>
+        <h1 id="Hexo的基本命令"><a href="#Hexo的基本命令" class="headerlink" title="Hexo的基本命令"></a><strong>Hexo的基本命令</strong></h1><p>在日常的维护中，经常需要用到一下几个命令：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span>    <span class="comment"># 创建一个新的文章</span></span><br><span class="line">$ hexo server               <span class="comment"># 运行本地虚拟服务器</span></span><br><span class="line">$ hexo generate             <span class="comment"># 生成静态文件</span></span><br><span class="line">$ hexo clean                <span class="comment"># 清除生成的静态文件</span></span><br><span class="line">$ hexo deploy               <span class="comment"># 部署</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h1 id="使用Hexo过程中遇到的问题及其解决方案"><a href="#使用Hexo过程中遇到的问题及其解决方案" class="headerlink" title="使用Hexo过程中遇到的问题及其解决方案"></a><strong>使用Hexo过程中遇到的问题及其解决方案</strong></h1><p>目前遇到了两个比较棘手的问题，具体下叙。如果有其他额外的问题可直接去<a href="http://hahack.com/codes/hexo-theme-freemind/" target="_blank" rel="external"><strong>freemind</strong>主题作者博客</a>中询问，作者回复很快，而且问题都能解决。</p>
+<p><strong>Q:</strong> 在部分md文件中使用了中文，生成静态文件之后的页面中出现了乱码怎么解决？<br><strong>A:</strong> 确认md文件使用的是utf-8格式保存。<br><strong>Q:</strong> categories和tags页面可以正常显示，但是没有任何文章记录被显示出来？<br><strong>A:</strong> 在/source/categories/index.md文件中添加布局选项<code>layout: categories</code>；tags的操作也是同理。</p>
 
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/01/21/02-a-new-start/" rel="next" title="新的开始">
+                <i class="fa fa-chevron-left"></i> 新的开始
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/01/21/a-new-start/" rel="prev" title="新的开始">
-                新的开始 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/02/14/04-introduction-to-machine-learning/" rel="prev" title="机器学习概论">
+                机器学习概论 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -357,7 +370,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -365,7 +378,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -374,7 +387,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -407,7 +420,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo的基本命令"><span class="nav-number">1.</span> <span class="nav-text">Hexo的基本命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Hexo过程中遇到的问题及其解决方案"><span class="nav-number">2.</span> <span class="nav-text">使用Hexo过程中遇到的问题及其解决方案</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -672,5 +685,35 @@
   
 
 
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </body>
 </html>
