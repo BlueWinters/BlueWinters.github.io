@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="GitHub,Hexo" />
+  <meta name="keywords" content="Machine Learning,EM" />
 
 
 
@@ -57,17 +57,16 @@
 
 
 
-<meta name="description" content="新的开始，创建Hexo博客">
+<meta name="description" content="最大期望算法（Expectation-maximization algorithm，又译期望最大化算法）在统计中被用于寻找，依赖于不可观察的隐性变量的概率模型中，参数的最大似然估计。EM算法的一个重要应用就是对高斯混合模型进行参数估计。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="新的开始">
-<meta property="og:url" content="http://yoursite.com/2016/01/21/02-a-new-start/index.html">
+<meta property="og:title" content="EM算法">
+<meta property="og:url" content="http://yoursite.com/2016/03/15/09-em-algorithm/index.html">
 <meta property="og:site_name" content="BlueWinters">
-<meta property="og:description" content="新的开始，创建Hexo博客">
-<meta property="og:image" content="http://7xqvu3.com1.z0.glb.clouddn.com/blog_github_hexo.png">
-<meta property="og:updated_time" content="2016-02-29T05:52:29.385Z">
+<meta property="og:description" content="最大期望算法（Expectation-maximization algorithm，又译期望最大化算法）在统计中被用于寻找，依赖于不可观察的隐性变量的概率模型中，参数的最大似然估计。EM算法的一个重要应用就是对高斯混合模型进行参数估计。">
+<meta property="og:updated_time" content="2016-03-15T12:46:56.844Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="新的开始">
-<meta name="twitter:description" content="新的开始，创建Hexo博客">
+<meta name="twitter:title" content="EM算法">
+<meta name="twitter:description" content="最大期望算法（Expectation-maximization algorithm，又译期望最大化算法）在统计中被用于寻找，依赖于不可观察的隐性变量的概率模型中，参数的最大似然估计。EM算法的一个重要应用就是对高斯混合模型进行参数估计。">
 
 
 
@@ -85,7 +84,7 @@
   };
 </script>
 
-  <title> 新的开始 | BlueWinters </title>
+  <title> EM算法 | BlueWinters </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -215,7 +214,7 @@
             
             
               
-                新的开始
+                EM算法
               
             
           </h1>
@@ -227,8 +226,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-21T15:36:34+08:00" content="2016-01-21">
-              2016-01-21
+            <time itemprop="dateCreated" datetime="2016-03-15T20:40:27+08:00" content="2016-03-15">
+              2016-03-15
             </time>
           </span>
 
@@ -241,8 +240,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Blog/" itemprop="url" rel="index">
-                    <span itemprop="name">Blog</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -272,30 +271,34 @@
       
 
       
-        <p><img src="http://7xqvu3.com1.z0.glb.clouddn.com/blog_github_hexo.png" alt="GitHub+Hexo"></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>这是一个新的尝试，放弃了过去QQ空间和cnblog的博客，将家搬到了<strong>GitHub</strong>这里来，也算是对过去的一个新的开始吧，而恰巧，今天又下雪了，对于几年没有见到雪的我来说，不知道这是不是一个祥兆呢。<br>当然也许也会像下面的人这么说：<br><a id="more"></a></p>
-<blockquote>
-<p><a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html" target="_blank" rel="external">阮一峰 - 喜欢写Blog的人，会经历三个阶段</a>：<br>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。<br>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。<br>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</p>
-</blockquote>
-<h1 id="GitHub与Hexo相关"><a href="#GitHub与Hexo相关" class="headerlink" title="GitHub与Hexo相关"></a><strong>GitHub与Hexo相关</strong></h1><h2 id="框架选择"><a href="#框架选择" class="headerlink" title="框架选择"></a><strong>框架选择</strong></h2><p>倾向于UI风格较好，而且能够输入数学公式，并且安装比较简单的框架。由于经历有限，就了解了Jekyll和Hexo两个。<br>首先是Jekyll，使用人气最高，不过着手过程中发现安装的过程需要Ruby和RubyGem，在下载和安装两者的过程中遇到了很多问题，而且官方并不推荐Windows用户使用（Linux和Mac用户较为合适）。<br>其次就是Hexo，由于安装比较简单，并且能够搭配不同风格的UI，我暂时就选择了Hexo，不过不保证以后会有更换。</p>
-<h2 id="Hexo博客创建"><a href="#Hexo博客创建" class="headerlink" title="Hexo博客创建"></a><strong>Hexo博客创建</strong></h2><p>过程很简单，基本流程如下，同时附上自己使用的一些参考资料：</p>
-<ol>
-<li>注册<a href="https://github.com/" target="_blank" rel="external">Github</a>账号</li>
-<li>安装<a href="https://git-scm.com/" target="_blank" rel="external">Git</a></li>
-<li>用Git生成SSH Key</li>
-<li>安装<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a></li>
-<li>安装Hexo</li>
-</ol>
-<p>参考资料：<br>[1] <a href="https://github.com/" target="_blank" rel="external">Github官网</a><br>[2] <a href="https://git-scm.com/" target="_blank" rel="external">Git官网</a><br>[3] <a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js官网</a><br>[4] <a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="external">Git生成SSH Key</a><br>[5] <a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">Hexo安装与部署</a><br>[6] <a href="http://hexo.io/themes/" target="_blank" rel="external">Hexo Themes</a></p>
-<h2 id="Hexo博客写作与管理"><a href="#Hexo博客写作与管理" class="headerlink" title="Hexo博客写作与管理"></a><strong>Hexo博客写作与管理</strong></h2><p><a href="https://www.zybuluo.com/" target="_blank" rel="external">Cmd Markdown在线编辑器</a><br><a href="http://www.isetsuna.com/hexo/writing-image/" target="_blank" rel="external">Markdown文件头丰富</a></p>
-<h2 id="待完善事宜"><a href="#待完善事宜" class="headerlink" title="待完善事宜"></a><strong>待完善事宜</strong></h2><p>目前能够想到的需要继续完善的事宜：</p>
-<ol>
-<li>评论插件</li>
-<li>标签和文章分类</li>
-<li>自定义域名和SEO</li>
-<li>搜索框机器使用</li>
-<li>LaTex公式使用</li>
-</ol>
+        <h1 id="关于EM算法的理解"><a href="#关于EM算法的理解" class="headerlink" title="关于EM算法的理解"></a><strong>关于EM算法的理解</strong></h1><p>EM算法(Expectation-Maximization algorithm)是一种迭代算法，用于<strong>含有隐变量</strong>的概率模型参数的最大似然估计，或最大后验概率估计。与其他算法相比最大的区别在于，EM算法是个一般的方法，<strong>没有具体的模型</strong>。<br>最开始研读EM算法的时候，总是因为混合高斯模型的原因，没有理解EM算法的“一般”之处体现在哪里。后来才明白，混合高斯模型本身就是EM算法的一个重要应用。<br>我用一个例子来解释EM算法的<strong>一般</strong>之处。已知学校男女生身高各自独立的服从一个高斯分布，随机抽查了学校200个学生的身高，但是没有记录学生的性别。现在的问题是，如何通过这200个数据样本来估计男女生身高所对应的高斯分布的参数。需要解释的，每个样本记录是来自男生还是女生就是EM算法当中所谓的<strong>隐变量</strong>，对于两个高斯分布参数的估计，就是EM算法所求的结果。EM算法的一般之处体现在，男女生各自所对应的概率分布不一定非要是高斯分布，可以是其他任何可能的带有参数的分布，而EM算法的目的就是对这两个带有参数的分布进行参数估计。</p>
+<a id="more"></a>
+<h1 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a><strong>最大似然估计</strong></h1><p>EM算法中，使用的参数估计的方法是最大似然估计。这部分内容主要参照<a href="https://book.douban.com/subject/1191929/" target="_blank" rel="external">《概率论与数理统计教程》</a>。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a><strong>定义</strong></h2><p>设总体的概率函数$p(x;\theta),\theta \in \Theta$，其中$\theta$是一个位置参数或几个位置参数组成的参数向量，$\Theta$是参数$\theta$可能的取值空间，$x_1,…,x_n$是来自该总体的样本，将<strong>样本的联合概率函数</strong>看成$\theta$的函数，用$L(\theta;x_1,…,x_n)$表示，简记为$L(\theta)$，<br>$$L(\theta)=L(\theta;x_1,…,x_n)=p(x_1;\theta)…p(x<em>n;\theta)=\prod</em>{i=1}^n p(x_i;\theta)$$</p>
+<p>$L(\theta)$称为样本的似然函数。如果某估计量$\hat{\theta}=\hat{\theta}(x_1,…,x<em>n)$满足<br>$$L(\hat{\theta})=\max</em>{\theta \in \Theta}L(\theta)$$</p>
+<p>则称$\hat{\theta}$是$\theta$的<strong>最大似然估计(Maximum Likelihook Estimate)</strong>。</p>
+<h2 id="对数似然函数"><a href="#对数似然函数" class="headerlink" title="对数似然函数"></a><strong>对数似然函数</strong></h2><p>事实上，由于$\ln x$是$x$的单调函数，因此，<strong>在对数似然函数$\ln L(\theta)$上达到最大与使似然函数$L(\theta)$达到最大是等价的</strong>。在具体的计算中，人们通常更习惯于使用对数似然函数$\ln L(\theta)$除法来寻找$\theta$的最大似然估计。</p>
+<h1 id="Jensen不等式"><a href="#Jensen不等式" class="headerlink" title="Jensen不等式"></a><strong>Jensen不等式</strong></h1><p>Jensen不等式用于EM算法的推导过程，以下只给出其表述，不涉及证明。<br>如果$f$是<strong>凸函数</strong>，根据Jensen不等式得<br>$$f(\sum_{i=1}^n \lambda_ix<em>i)\leq \sum</em>{i=1}^n \lambda_if(x_i)\quad \lambda<em>i\geq 0\quad\sum</em>{i=1}^n\lambda_i=1$$</p>
+<p>如果将$x_i$看做是随机变量，将$\lambda_i$看成是随机变量$x_i$出现的概率，那么$E[f(x)] \geq f(E(x))$。<br>特别的，如果$f$是严格凸函数，那么当且仅当$x$为常量时，等号成立。<br>对应的，如果$f$是<strong>凹函数</strong>，改变对应不等号的方向，也就是$E[f(x)] \leq f(E(x))$。<br>另外，关于Jensen不等式的图形化表述可以参照：<a href="http://zhouyichu.com/machine-learning/EM-Algorithm.html#" target="_blank" rel="external">EM-Algorithm</a>。</p>
+<h1 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a><strong>EM算法</strong></h1><p>为了更好的表述，现在重新回到前面估计学生身高分布参数的例子中。但是与之前稍许有些不同的是，为了保证EM算法的一般性，我并不准备假设男女学生的身高服从高斯分布，而是<strong>假设他们服从某个含有参数$\theta$的任意分布</strong>。</p>
+<h2 id="问题的描述"><a href="#问题的描述" class="headerlink" title="问题的描述"></a><strong>问题的描述</strong></h2><p>设采集学校男女生的身高样本$X={x_1,x_2,\cdots,x_N}$（但是并没有记录样本来自男生还是女生），用二元组$(x_i,z_i)$来表示每一项数据：$x_i$表示第$i$个学生的身高，$z_i$表示第$i$个学生究竟是男生（用1表示）还是女生（用0表示）。<br>同时假设，男女生的身高服从某个含有参数$\theta$的任意分布。目标是，通过样本数据求出参数$\theta$的最大似然估计。</p>
+<h2 id="过程的推导"><a href="#过程的推导" class="headerlink" title="过程的推导"></a><strong>过程的推导</strong></h2><p>根据联合分布的概率和，得到：$p(x<em>i;\theta) = \sum\limits</em>{z_i}p(x_i,z<em>i;\theta)$<br>利用对数极大似然估计函数，得到<br>\begin{align}<br>H(\theta)&amp;= \sum</em>{i=1}^N\ln p(x<em>i;\theta) \\<br>&amp;= \sum</em>{i=1}^N \ln \sum_{z_i} p(x_i,z_i;\theta)<br>\end{align}</p>
+<p>是和极大似然估计中一样，我们需要使得$H(\theta)$达到最大值，最常规的做法就是对$H(\theta)$进行求导，令其导数为0。但是这和之前不含隐变量的函数不同，这个函数对$\theta$比较复杂。<br>所以，为了能解决这个为题，可以尝试做一些改变：令$Q_i$表示变量$z_i$的某种分布，且$Q<em>i$满足$\sum\limits</em>{z_i}Q_i(z_i)=1$，$Q_i(z_i) \ge 0$,利用这个$Q_i$，我们可以将关于$H(\theta)$等式改变为：</p>
+<p>$$H(\theta) = \sum<em>{i=1}^N\ln \sum</em>{z_i}Q_i(z_i) \cdot \frac{p(x_i,z_i;\theta)}{Q_i(z_i)}$$</p>
+<p>由于对数函数$\ln x$是个凹函数，故此处可以直接应用Jensen不等式：<br>\begin{align}<br>H(\theta) &amp;= \sum<em>{i=1}^N\ln \sum</em>{z_i}Q_i(z_i) \cdot \frac{p(x_i,z_i;\theta)}{Q_i(z<em>i)} \\<br>&amp;\ge \sum</em>{i=1}^N \sum_{z_i} Q_i(z_i) \ln \frac{p(x_i,z_i;\theta)}{Q_i(z_i)}<br>\end{align}</p>
+<p>但是，到了这里你也许会问，我们明明要求的是$H(\theta)$的最大值，可是这里怎么会是一个”大于等于”呢？的确，目前我们所得到的确实是一个下界，而且这个下界和$Q_i$以及$p(x_i,z_i;\theta)$有关。但是在EM算法中，我们能够通过迭代，不断提高这个下界，来逐渐逼近$H(\theta)$。当不等式变为等式时，迭代结束。<br>关于<strong>逼近过程的图像化描述</strong>可以参照资料<a href="https://www.zybuluo.com/Hederahelix/note/101970" target="_blank" rel="external">EM算法</a>。<br>根据Jensen不等式等号成立的条件可得：<br>$$\frac{p(x_i,z_i;\theta)}{Q_i(z_i)}=c$$</p>
+<p>又因为$\sum\limits_{z_i}Q_i(z_i)=1$，因此可以得$p(x_i;\theta)=c$。<br>重新将其带回，可以得到：<br>\begin{align}<br>Q_i(z_i) &amp;= \frac{p(x_i,z_i;\theta)}{c}\\<br>&amp;= \frac{p(x_i,z_i;\theta)}{p(x_i,;\theta)}\\<br>&amp;= p(z_i\vert x_i;\theta)<br>\end{align}</p>
+<p>这样一来，如果给定$x_i,\theta$，计算出$Q_i(z_i)$；知道$Q_i(z_i)$，又可以重新估计参数$\theta$。因此，如果我们开始时，赋给$\theta$一个初始值，通过这个过程就可以反复迭代直至收敛，这也就是EM算法的思想了。<br>实际上，总结EM算法的过程就是两步，E&amp;M。<br><strong>E-Step</strong><br>对于每个$i$，估计隐变量$z_i$的分布：<br>$$Q_i(z_i)=p(z_i\vert x_i;\theta_t)$$</p>
+<p><strong>M-Step</strong><br>重新估计参数$\theta<em>{t+1}$：<br>$$\theta</em>{t+1}=\arg\max<em>\theta \sum</em>{i=1}^N \sum_{z_i} Q_i(z_i) \ln \frac{p(x_i,z_i;\theta_t)}{Q_i(z_i)}$$</p>
+<p>另外，关于EM算法收敛的证明参照<a href="http://cs229.stanford.edu/notes/cs229-notes8.pdf" target="_blank" rel="external">The EM Algorithm</a>。</p>
+<h1 id="高斯混合模型与EM算法"><a href="#高斯混合模型与EM算法" class="headerlink" title="高斯混合模型与EM算法"></a><strong>高斯混合模型与EM算法</strong></h1><p>EM算法的一个重要应用就是对高斯混合模型进行参数估计。</p>
+<h2 id="高斯混合模型的定义"><a href="#高斯混合模型的定义" class="headerlink" title="高斯混合模型的定义"></a><strong>高斯混合模型的定义</strong></h2><p>该部分的内容主要参考<a href="http://book.douban.com/subject/10590856/" target="_blank" rel="external">《统计学习方法》</a>。<br>高斯混合模型是指具有如下形式的概率分布模型：<br>$$p(x|\theta)=\sum_{k=1}^K \alpha_k \phi(x|\theta_k)$$</p>
+<p>其中，$\alpha<em>k$是系数，并且满足<br>$$\sum</em>{k=1}^K \alpha_k=1,\alpha_k \geq 0$$</p>
+<p>$\phi(x|\theta_k)$是高斯分布函数，$\theta_k=(\mu_k,\sigma_k^2)$，并且有<br>$$\phi(x|\theta_k)=\frac{1}{\sqrt{2\pi\sigma_k^2}}\exp\left(-\frac{(y-\mu_k)^2}{2\sigma_k^2}\right)$$<br>称为第$k$个分模型。</p>
+<h2 id="形式化表述"><a href="#形式化表述" class="headerlink" title="形式化表述"></a><strong>形式化表述</strong></h2><p>这里直接给出混合高斯模型对应的E-Step和M-Step，此部分内容参考<a href="http://cs229.stanford.edu/notes/cs229-notes7b.pdf" target="_blank" rel="external">Mixtures of Gaussians and the EM algorithm
+</a>。<br><strong>E-Step</strong><br>对于每个$i$，估计隐变量$w_i^{(j)}$的分布：<br>$$w_j^{(i)}=p(z^{(i)}=j|x^{(i)};\phi,\mu,\Sigma)$$</p>
+<p><strong>M-Step</strong><br>重新估计参数$\phi_j,\mu_j,\Sigma_j$：<br>\begin{align}<br>\phi<em>j&amp;=\frac{1}{m} \sum</em>{i=1}^m w_j^{(i)}\\<br>\mu<em>j&amp;=\frac{\sum</em>{i=1}^m w<em>j^{(i)}x^{(i)}}{\sum</em>{i=1}^m w_j^{(i)}}\\<br>\Sigma<em>j&amp;=\frac{\sum</em>{i=1}^m w_j^{(i)}(x^{(i)}-\mu_j)(x^{(i)}-\mu<em>j)^T}{\sum</em>{i=1}^m w_j^{(i)}}\\<br>\end{align}</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a><strong>参考资料</strong></h1><p>[1] <a href="http://zhouyichu.com/machine-learning/EM-Algorithm.html#" target="_blank" rel="external">EM-Algorithm</a><br>[2] <a href="http://cs229.stanford.edu/notes/cs229-notes7b.pdf" target="_blank" rel="external">Mixtures of Gaussians and the EM algorithm</a></p>
 
       
     </div>
@@ -304,9 +307,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/GitHub/" rel="tag">#GitHub</a>
+            <a href="/tags/EM/" rel="tag">#EM</a>
           
-            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+            <a href="/tags/Machine-Learning/" rel="tag">#Machine Learning</a>
           
         </div>
       
@@ -315,17 +318,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/20/00-for-test/" rel="next" title="Just For Test">
-                <i class="fa fa-chevron-left"></i> Just For Test
+              <a href="/2016/03/03/08-lagrange-duality/" rel="next" title="拉格朗日对偶性">
+                <i class="fa fa-chevron-left"></i> 拉格朗日对偶性
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/05/03-notes-of-heox-1/" rel="prev" title="Hexo使用笔记(一)">
-                Hexo使用笔记(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -443,7 +442,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GitHub与Hexo相关"><span class="nav-number">2.</span> <span class="nav-text">GitHub与Hexo相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#框架选择"><span class="nav-number">2.1.</span> <span class="nav-text">框架选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo博客创建"><span class="nav-number">2.2.</span> <span class="nav-text">Hexo博客创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo博客写作与管理"><span class="nav-number">2.3.</span> <span class="nav-text">Hexo博客写作与管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#待完善事宜"><span class="nav-number">2.4.</span> <span class="nav-text">待完善事宜</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于EM算法的理解"><span class="nav-number">1.</span> <span class="nav-text">关于EM算法的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最大似然估计"><span class="nav-number">2.</span> <span class="nav-text">最大似然估计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数似然函数"><span class="nav-number">2.2.</span> <span class="nav-text">对数似然函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jensen不等式"><span class="nav-number">3.</span> <span class="nav-text">Jensen不等式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EM算法"><span class="nav-number">4.</span> <span class="nav-text">EM算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题的描述"><span class="nav-number">4.1.</span> <span class="nav-text">问题的描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程的推导"><span class="nav-number">4.2.</span> <span class="nav-text">过程的推导</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高斯混合模型与EM算法"><span class="nav-number">5.</span> <span class="nav-text">高斯混合模型与EM算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高斯混合模型的定义"><span class="nav-number">5.1.</span> <span class="nav-text">高斯混合模型的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#形式化表述"><span class="nav-number">5.2.</span> <span class="nav-text">形式化表述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
