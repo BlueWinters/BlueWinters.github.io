@@ -1,0 +1,742 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Machine Learning,Manifold Learning,LLE,Dimensionality Reduction" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="局部线性嵌入(Locally Linear Embeding)是一个比较经典的流形学习算法，于2000年和Isomap一同发表在Science杂志上。该方法的主要思想是试图用数据的局部线性来代替全局线性，即在样本空间中建立数据的局部线性关系，同时在寻找数据的低维嵌入时保持这种线性关系不变。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="局部线性嵌入">
+<meta property="og:url" content="http://yoursite.com/2016/04/29/12-locally-linear-embeding/index.html">
+<meta property="og:site_name" content="BlueWinters">
+<meta property="og:description" content="局部线性嵌入(Locally Linear Embeding)是一个比较经典的流形学习算法，于2000年和Isomap一同发表在Science杂志上。该方法的主要思想是试图用数据的局部线性来代替全局线性，即在样本空间中建立数据的局部线性关系，同时在寻找数据的低维嵌入时保持这种线性关系不变。">
+<meta property="og:updated_time" content="2016-04-29T12:42:25.782Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="局部线性嵌入">
+<meta name="twitter:description" content="局部线性嵌入(Locally Linear Embeding)是一个比较经典的流形学习算法，于2000年和Isomap一同发表在Science杂志上。该方法的主要思想是试图用数据的局部线性来代替全局线性，即在样本空间中建立数据的局部线性关系，同时在寻找数据的低维嵌入时保持这种线性关系不变。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 局部线性嵌入 | BlueWinters </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">BlueWinters</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                局部线性嵌入
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-29T20:16:33+08:00" content="2016-04-29">
+              2016-04-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>最近的看的资料主要是关于流形学习的，其应用还是围绕降维。这篇的主要内容是关于LLE算法的。</p>
+<h1 id="LLE算法"><a href="#LLE算法" class="headerlink" title="LLE算法"></a><strong>LLE算法</strong></h1><p>局部线性嵌入算法（Locally linear embedding）是由Sam T.Roweis和Lawrence K.Saul于2000年发表于《Science》杂志，巧合是的它同Isomap同一时间一起发表。</p>
+<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a><strong>算法思想</strong></h2><p>同全局优化的Isomap算法相比，局部线性嵌入是一种局部算法。它的<strong>主要思想</strong>是利用数据的局部线性来逼近全局线性：即假设任意样本点都可表示为其临近样本点的线性组合，在寻找数据的低维嵌入同时，保持这种邻域线性组合关系不变。</p>
+<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a><strong>算法步骤</strong></h2><p>关于算法大致步骤，可以参考资料[1]，对于公式的推导可参考资料[2]和[3]，比较详细的推导过程可直接参考[3]。<br>[1] <a href="http://www.pami.sjtu.edu.cn/people/xzj/introducelle.htm" target="_blank" rel="external">LLE及其改进算法介绍</a><br>[2] <a href="https://www.cs.nyu.edu/~roweis/lle/papers/lleintro.pdf" target="_blank" rel="external">An Introduction to Locally Linear Embedding</a><br>[3] <a href="https://cs.adelaide.edu.au/~wojtek/papers/lle.pdf" target="_blank" rel="external">A note on the locally linear embedding algorithm</a></p>
+<p>总结来说，LLE算法可以归结为三步:<br>(1)寻找每个样本点的$k$个近邻点；<br>(2)由每个样本点的近邻点计算出该样本点的局部重建权值矩阵；<br>(3)由该样本点的局部重建权值矩阵和其近邻点计算出该样本点的输出值。<br>具体的步骤详细描述。</p>
+<p><strong>第一步</strong><br>对于每个样本点$x_i$，根据参数（$S$或者$\epsilon$）计算出该样本点的邻域点集合$N_i={ \alpha_{i1},…,\alpha_{ik} }$。这里为了表示方便起见，我采用固定邻域点个数参数$S$。</p>
+<p><strong>第二步</strong><br>这一步的作用是计算出每个样本点的局部线性系数矩阵。<br>假设样本点$x_i$可被邻域样本点$\alpha_{i1},…,\alpha_{ik}$线性表示，定义目标函数（误差最小化）<br>\begin{align}<br>\arg \min_w &amp; \sum_{i=1}^N | x_i-\sum_{j=1}^S w_{ij}\alpha_{ij} |^2 \\<br>s.t. &amp; \sum_{j=1}^S w_{ij}=1,i=1,…,N<br>\end{align}</p>
+<p>$N$为样本总数，$w_{ij}$为样本点$i$对应的第$j$个系数。<br>我们观察单个样本点的目标函数<br>\begin{align}<br>| x_i-\sum_{j=1}^S w_{ij}\alpha_{ij} |^2 &amp;=| \sum_{j=1}^S (w_{ij}x_i- w_{ij}\alpha_{ij}) |^2 \\<br>&amp;=| \sum_{j=1}^S w_{ij}(x_i- \alpha_{ij}) |^2 =| Q_i w_i |^2<br>\end{align}</p>
+<p>这里$Q_i=(x_i-\alpha_{i1},…,x_i-\alpha_{iS})$，系数向量$w_i=(w_{i1},…,w_{iS})^T$。<br>很容易看出这是个优化问题，可以采用拉格朗日乘数法：<br>\begin{align}<br>F_i &amp;= | x_i-\sum_{j=1}^S w_{ij}\alpha_{ij} |^2 - \lambda_i(\sum_{j=1}^S w_{ij}-1) \\<br>&amp;=| Q_i w_i |^2 - \lambda_i 1_{S_i}^T w_i=w_i^T Q_i^T Q_i w_i - \lambda_i 1_{S_i}^T w_i<br>\end{align}</p>
+<p>其中$1_{S_i}$长度为$S$，并且元素全为1的列向量；<br>接着，用$F_i$对$w_i$求偏导<br>\begin{align}<br>\frac{\partial F_i}{\partial w_i} &amp;= Q_i^T Q_i w_i - \lambda_i 1_{S_i} \\<br>&amp;=C_i w_i-\lambda_i 1_{S_i}=0 \\<br>\Rightarrow w_i &amp;= \lambda_i C_i^{-1} 1_{S_i}<br>\end{align}</p>
+<p>这里令$C_i=Q_i^T Q_i$。再将$w_i$带入式子$\sum_{j=1}^S w_{ij}=1_{S_i}^T w_i=1$，得到<br>\begin{align}<br>&amp; 1_{S_i}^T (\lambda_i C_i^{-1} 1_{S_i})=1 \Rightarrow \lambda_i = (1_{S_i}^T C_i^{-1} 1_{S_i})^{-1}<br>\end{align}</p>
+<p>另外需要声明的有两点。<br>第一点是我在很多文献中看到以下的的结论，尝试直接推导很是费劲，最终采用了上面矩阵的形式才得以证明。<br>$$w_{ij}=\frac{\sum_{k=1}^S (C_i^{-1})_{jk}}{\sum_{p=1}^S \sum_{q=1}^S (C_i^{-1})_{pq}}$$</p>
+<p>第二点是矩阵$Q_i$不一定可逆，这个时候可以以下方法直接正则化，其中$I_S$是一个大小为$S \times S$的单位矩阵<br>$$C_i=C_i+rI_S$$</p>
+<p><strong>第三步</strong><br>将所有的样本点映射到低维空间中，并<strong>重建高维空间中的线性关系</strong>。<br>首先结合前两步中求出的系数$w_{ij}$，可以定义<strong>邻接矩阵</strong>$U=[u_{ij}]_{N \times N}$，假设样本点$x_i$的邻域样本点集合为$N(i)$，那么<br>$$<br>u_{ij}=<br>\begin{cases}<br>w_{ij}, &amp;x_j \in N(i) \\<br>0, &amp;x_j \notin N(i)<br>\end{cases}<br>$$</p>
+<p>需要注意的是前面求得的系数$w_{ij}$是针对局部的，后面的矩阵$U$是针对全局的。</p>
+<p>然后，样本点为$x_i$被映射到$y_i$，对应领域内的点$\alpha_{i1},…,\alpha_{ik}$被映射为$\beta_{i1},…,\beta_{ik}$。依据假设，$y_i$可被$\beta_{i1},…,\beta_{ik}$线性表出。同理可定义目标函数（重建误差最小化）<br>\begin{align}<br>\arg \min_Y &amp; \sum_{i=1}^N | y_i-\sum_{j=1}^N u_{ij}y_j |_F^2 \\<br>s.t. &amp; \sum_{i=1}^S y_i=0 \\<br>&amp; \frac{1}{N}\sum_{i=1}^N y_i y_i^T=I_d<br>\end{align}</p>
+<p>因为$\sum_{j=1}^N u_{ij}y_j$表示$YU^T$的第$i(&lt;N)$列，故可将目标函数写成矩阵形式<br>\begin{align}<br>\sum_{i=1}^N | y_i-\sum_{j=1}^N u_{ij}y_j |_F^2 &amp;=| Y-YU^T |_F^2 \\<br>&amp;= tr \left((Y-YU^T)(Y-YU^T)^T \right) \\<br>&amp; =tr \left(Y(I-U^T)(I-U)Y^T \right) \\<br>&amp; =tr \left(YMY^T \right)<br>\end{align}</p>
+<p>其中$M=(I-U^T)(I-U)$。最终，问题转化为求解矩阵$M$的最小$d+1$个特征向量$u_1,…,u_{d+1}$。舍去最小特征值对应的特征向量（原因未知），则对应的嵌入坐标为$Y=(u_2,…,u_{d+1})^T$。</p>
+<p>需要的注意的是，优化需要满足两个条件：即数据中心化和正交化。这两个限制条件的作用在文献[3]中是这样解释的：</p>
+<blockquote>
+<p>The imposing of constraints guarantees the essential uniqueness of the solution.</p>
+</blockquote>
+<p>特别的，对于后一个条件在查到文献[3]中是这样解释的：<strong>第二个限制条件确保了重建误差对于不同坐标系的嵌入有同样的度量</strong>。虽然我能够理解<strong>需要一些限制条件以保证最终的解的唯一性</strong>，但是并没有仔细去求证上述两个条件真的能否保证解的唯一性。</p>
+<p>对于第三步最终的优化方式依然可以采用拉格朗日乘数法，具体的优化推导在资料[3]中可见，不过我没有再去看，时间限制且到此为止了。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a><strong>参考资料</strong></h1><p>[4] <a href="http://www.cnki.net/KCMS/detail/detail.aspx?QueryID=1&amp;CurRec=1&amp;recid=&amp;filename=2009111041.nh&amp;dbname=CDFD0911&amp;dbcode=CDFD&amp;pr=&amp;urlid=&amp;yx=&amp;v=MjMyODExMjdGN0s1SDlISXJwRWJQSVI4ZVgxTHV4WVM3RGgxVDNxVHJXTTFGckNVUkx5ZlkrUm1GQ25tVWI3TlY=" target="_blank" rel="external">基于全局统计与局部几何性质的数据降维算法研究_王雷</a></p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Dimensionality-Reduction/" rel="tag">#Dimensionality Reduction</a>
+          
+            <a href="/tags/LLE/" rel="tag">#LLE</a>
+          
+            <a href="/tags/Machine-Learning/" rel="tag">#Machine Learning</a>
+          
+            <a href="/tags/Manifold-Learning/" rel="tag">#Manifold Learning</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/19/11-bp-algorithm/" rel="next" title="BP算法">
+                <i class="fa fa-chevron-left"></i> BP算法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="Winters" />
+          <p class="site-author-name" itemprop="name">Winters</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LLE算法"><span class="nav-number">2.</span> <span class="nav-text">LLE算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思想"><span class="nav-number">2.1.</span> <span class="nav-text">算法思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法步骤"><span class="nav-number">2.2.</span> <span class="nav-text">算法步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Winters</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>

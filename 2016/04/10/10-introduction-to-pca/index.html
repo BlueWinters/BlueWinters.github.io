@@ -1,0 +1,757 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Machine Learning,PCA,KPCA,Dimensionality Reduction" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="在多元统计分析中，主成分分析(Principal components analysis，PCA)是一种分析、简化数据集的技术。在机器学习领域被广泛的应用于数据降维，特别是人脸识别等。本文的主要内容是讲解了PCA的理论基础。然而PCA对于非高斯分布的降维效果不太理想，故很自然的又引入了KPCA的概念，并做了简单的理论叙述。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="主成分分析">
+<meta property="og:url" content="http://yoursite.com/2016/04/10/10-introduction-to-pca/index.html">
+<meta property="og:site_name" content="BlueWinters">
+<meta property="og:description" content="在多元统计分析中，主成分分析(Principal components analysis，PCA)是一种分析、简化数据集的技术。在机器学习领域被广泛的应用于数据降维，特别是人脸识别等。本文的主要内容是讲解了PCA的理论基础。然而PCA对于非高斯分布的降维效果不太理想，故很自然的又引入了KPCA的概念，并做了简单的理论叙述。">
+<meta property="og:updated_time" content="2016-04-29T12:27:37.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="主成分分析">
+<meta name="twitter:description" content="在多元统计分析中，主成分分析(Principal components analysis，PCA)是一种分析、简化数据集的技术。在机器学习领域被广泛的应用于数据降维，特别是人脸识别等。本文的主要内容是讲解了PCA的理论基础。然而PCA对于非高斯分布的降维效果不太理想，故很自然的又引入了KPCA的概念，并做了简单的理论叙述。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 主成分分析 | BlueWinters </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">BlueWinters</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                主成分分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-10T16:37:24+08:00" content="2016-04-10">
+              2016-04-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>好久没再“动笔”来写点东西了，看了好多资料，但是总感觉不成体系，四处开花却没有比较深入的研究。所以，终究还是觉得，写下一些札记，这样至少能够在需要的时候快速回忆起来。<br>当然，先写PCA也是因为绕不开最近看的内容——降维。总想在深度学习这个领域中多研究点东西，那就从基本的开始吧。</p>
+<h1 id="主成分分析的背景来源"><a href="#主成分分析的背景来源" class="headerlink" title="主成分分析的背景来源"></a><strong>主成分分析的背景来源</strong></h1><p>主成分分析(Principal components analysis，PCA)是一种分析、简化数据集的技术，来源于多元统计分析，说简单点主要就是做数据降维的。特别是在机器学习领域当中，经常面临维数灾难(Curse of Dimensionality)的问题。所以，往往无论在实际应用还是用于科学研究中，都会首先通过各种技术来对数据进行降维。而PCA就是一种成熟的，并且应用广泛的数据降维技术。</p>
+<h1 id="PCA的理论基础"><a href="#PCA的理论基础" class="headerlink" title="PCA的理论基础"></a><strong>PCA的理论基础</strong></h1><p>两种解释的理论推导都走了不少弯路，主要参照了资料<br>[1] <a href="http://www.52nlp.cn/prml%E8%AF%BB%E4%B9%A6%E4%BC%9A%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0-continuous-latent-variables" target="_blank" rel="external">PRML读书会第十二章 Continuous Latent Variables</a></p>
+<h2 id="符号说明"><a href="#符号说明" class="headerlink" title="符号说明"></a><strong>符号说明</strong></h2><p>设：样本数量为$N$，样本的维数为$D$，对应样本矩阵$X=(x_1,x_2,…,x_D)$。<br>假设样本均值满足中心化条件<br>$$\overline{x}=\frac{1}{N}\sum_{i=1}^N x_i=0$$</p>
+<p>样本协方差<br>$$S=\frac{1}{N}\sum_{i=1}^N (x_i-\overline{x})(x_i-\overline{x})^T=\frac{1}{N}\sum_{i=1}^N x_i x_i^T$$</p>
+<h2 id="最大方差解释"><a href="#最大方差解释" class="headerlink" title="最大方差解释"></a><strong>最大方差解释</strong></h2><p>这部分的解释源于最大方差的解释关键在于，投影之后样本之间方差的最大化。<br>假设投影矩阵$W=(w_1,…,w_D)$，那么$X$投影之后的样本矩阵为$Y=W^TX=(y_1,…,y_D)$。<br>就单个样本$x_i$的投影$y_i$<br>$$y_i=W^Tx_i$$</p>
+<p>所有样本在某一方向$w_k$上的方差<br>\begin{align}<br>\frac{1}{N}\sum_{i=1}^N (w_k^Tx_i-w_k^T\overline{x})^2=\frac{1}{N}\sum_{i=1}^N (w_k^Tx_i)^2=w_k^T S w_k<br>\end{align}</p>
+<p>事实上，根据<br>$$y_i=W^Tx_i<br>=\begin{pmatrix}<br>w_1^T \\<br>w_2^T \\<br>\vdots \\<br>w_D^T<br>\end{pmatrix}x_i<br>=\begin{pmatrix}<br>w_1^T x_i \\<br>w_2^T x_i \\<br>\vdots \\<br>w_D^T x_i<br>\end{pmatrix}$$</p>
+<p>$w_k^Tx_i$的含义是投影后的样本$y_i$在第$k$维的值。<br>为不失一般性，我们设$w_k^Tw_k=1$，然后我们可以明确目标函数和条件，即构造正交变换$w_k$使得样本方差最大化：<br>\begin{align}<br>\max &amp; \sum_{k=1}^D w_k^T S w_k \\<br>s.t. &amp; w_k^Tw_k=1, k=1,…,D<br>\end{align}</p>
+<p>这里直接用拉格朗日乘法求解<br>$$F=\sum_{k=1}^D w_k^T S w_k-\lambda\sum_{k=1}^D(w_k^Tw_k-1)$$</p>
+<p>对$w_k$求偏导并等于0，得到<br>$$S w_k=\lambda w_k$$</p>
+<h2 id="最小平方误差解释"><a href="#最小平方误差解释" class="headerlink" title="最小平方误差解释"></a><strong>最小平方误差解释</strong></h2><p>最小平方误差的意义在于，寻找到一个投影$W$，使得所有样本点到直线的距离之和最短。这部分内容也主要参考[1]。<br>假设$U=(u_1,…,u_D)$是$D$维空间的完备基向量，那么对于任意$D$维样本$x_k$，我们可以使用基向量$U$线性表示<br>$$x_k=\sum_{i=1}^D c_{ki} u_i$$<br>这里有个我想了很久都不知道怎么证明，却忽略了一个关键的事实——$U$中的向量彼此正交，即<br>$$u_i^T u_j=<br>\begin{cases}<br>1,&amp;i=j \\<br>0,&amp;i \not=j<br>\end{cases}$$</p>
+<p>过程如下<br>$$u_i^T x_k =\sum_{j=1}^D c_{kj} (u_i^T u_j)=c_{ki}$$</p>
+<p><strong>然而我们并不想用$D$个$D$维向量来表示样本，而是希望用$d(&lt;D)$个$D$维向量来表示。</strong>于是这样就有了对样本的估计<br>\begin{align}<br>\widehat{x}_k &amp;=\sum_{i=1}^d (u_k^T x_k) u_i \\<br>\Rightarrow x_k-\widehat{x}_k &amp;= \sum_{i=d+1}^D (u_k^T x_k) u_i<br>\end{align}</p>
+<p>根据最小均方误差得到<br>\begin{align}<br>J &amp;=\sum_{k=1}^N | x_k-\widehat{x}_k |^2 \\<br>&amp;=\sum_{k=1}^N (x_k-\widehat{x}_k)^T(x_k-\widehat{x}_k) \\<br>&amp;=\sum_{k=1}^N \left( \sum_{i=d+1}^D c_{ki} u_i \right)^T\left( \sum_{j=d+1}^D c_{kj} u_j \right) \\<br>&amp;=\sum_{k=1}^N \left( \sum_{i=d+1}^D \sum_{j=d+1}^D (c_{ki}c_{kj}) u_j^T  u_i  \right) \\<br>&amp;=\sum_{k=1}^N \left( \sum_{i=d+1}^D c_{ki}^2 \right)<br>\end{align}</p>
+<p>又且<br>$$c_{ki}^2=u_i^T x_k u_i^T x_k=u_i^T(x_k x_k^T)u_i$$</p>
+<p>故得到<br>\begin{align}<br>J&amp;=\sum_{k=1}^N \sum_{i=d+1}^D u_i^T(x_k x_k^T)u_i \\<br>&amp;=\sum_{i=d+1}^D \sum_{k=1}^N u_i^T(x_k x_k^T)u_i \\<br>&amp;=\sum_{i=d+1}^D u_i^T \left( \sum_{k=1}^N (x_k x_k^T) \right) u_i \\<br>&amp;=\sum_{i=d+1}^D u_i^T S u_i \\<br>\end{align}</p>
+<p>实际上依然可以看出这是一个优化问题，并且解法跟<strong>最大方差解释的解法</strong>是相似的：<br>\begin{align}<br>\min &amp;\sum_{i=d+1}^Du_i^T S u_i \\<br>s.t. &amp;u_i^T u_i=1,i=1,…,D<br>\end{align}</p>
+<h2 id="其他说明"><a href="#其他说明" class="headerlink" title="其他说明"></a><strong>其他说明</strong></h2><p><strong>对于PCA两种解释的几何意义可参照[2]和[3]，[4]给予了实际的例子来演示，过程相当的清晰，然而这三者的理论过程不如[1]严谨。</strong><br>[2] <a href="http://www.cnblogs.com/jerrylead/archive/2011/04/18/2020209.html" target="_blank" rel="external">主成分分析（Principal components analysis）-最大方差解释</a><br>[3] <a href="http://www.cnblogs.com/jerrylead/archive/2011/04/18/2020216.html" target="_blank" rel="external">主成分分析（Principal components analysis）-最小平方误差解释</a><br>[4] <a href="http://blog.codinglabs.org/articles/pca-tutorial.html" target="_blank" rel="external">PCA的数学原理</a><br>另外一些需要说明的是关于PCA的使用范围(很遗憾，对这个内容能够参考的文献比较少)。很多文献都说，PCA对于非高斯分布(也有说是对指数族分布)的数据处理起来效果相当不理想，至于原因为何就不知道了，不过对于这种情况可以考虑使用Kernel PCA。<br>另外有一些对于PCA降维的叙述：<br>[5] <a href="http://meroa.com/insight-into-pca/" target="_blank" rel="external">浅议PCA降维</a></p>
+<h1 id="Kernel-PCA"><a href="#Kernel-PCA" class="headerlink" title="Kernel PCA"></a><strong>Kernel PCA</strong></h1><p>实际是上，对于Kernel PCA的引入是一种很自然的事情。PCA的线性变换过程，决定了PCA对很多数据的降维实际上时无能为力的，特别是一些高阶数据。这个时候就可以考虑引入核函数，通过变换将原本在特征空间难于线性分类的数据，映射到在高维空间中线性可分的数据。<br>事实上，以下叙述的内容主要来源于一下资料：<br>[5] <a href="http://zhanxw.com/blog/2011/02/kernel-pca-%E5%8E%9F%E7%90%86%E5%92%8C%E6%BC%94%E7%A4%BA/" target="_blank" rel="external">Kernel PCA 原理和演示</a></p>
+<h2 id="Kernel-PCA的理论基础"><a href="#Kernel-PCA的理论基础" class="headerlink" title="Kernel PCA的理论基础"></a><strong>Kernel PCA的理论基础</strong></h2><p>我们的基本想法是，引入线性函数$\phi$，将输入空间中的样本点$x_1,…,x_D$变换为高维空间中的样本点$\phi(x_1),…,\phi(x_D)$，然后在此基础上使用<strong>原始PCA</strong>过程。但是，这个过程面临两个问题：<br>1.在核函数的理论中，很难或者很少直接给出映射函数$\phi$，一般都是通过内积形式给出，即给定一个核函数$K(x_i,x_j)$<br>2.PCA的使用要求输入数据是中心化的(centred)<br>下面两节依次来解决这两个问题。</p>
+<h3 id="使用核函数来在高维空间做PCA"><a href="#使用核函数来在高维空间做PCA" class="headerlink" title="使用核函数来在高维空间做PCA"></a><strong>使用核函数来在高维空间做PCA</strong></h3><p>这里首先假定映射后的数据是满足中心化的条件，即：<br>$$\sum_{i=1}^N \phi(x_i)=0$$</p>
+<p>那么，其对应的协方差矩阵为<br>$$C=\frac{1}{N}\sum_{i=1}^N \phi(x_i)\phi(x_i)^T$$</p>
+<p>事实上，我们的本意是对矩阵$C$使用<strong>原始的PCA过程</strong>，但是我们并不知道矩阵$C$，所以我们希望通过内积形式来寻找一个矩阵来替代它。<br>假设矩阵$C$的特征值和特征向量为$\lambda_k$和$v_k$，满足<br>$$Cu_k=\lambda_k u_k$$</p>
+<p><strong>首先</strong>利用上式子将$C$展开<br>\begin{align}<br>\lambda_k u_k &amp;= Cu_k \\<br>\lambda_k u_k &amp;= \left( \frac{1}{N}\sum_{i=1}^N \phi(x_i)\phi(x_i)^T \right)u_k \\<br>\Rightarrow u_k &amp;= \frac{1}{N\lambda_k}\sum_{i=1}^N \phi(x_i) \left( \phi(x_i)^T u_k \right) \\<br>\Rightarrow u_k &amp;= \sum_{i=1}^N \left( \frac{\phi(x_i)^T u_k}{N\lambda_i} \right) \phi(x_i) \\<br>\Rightarrow u_k &amp;= \sum_{i=1}^N \alpha_i^k \phi(x_i)<br>\end{align}</p>
+<p>其中$\alpha_i^k=\frac{\phi(x_i)^T u_k}{N\lambda_k}$，此时$u_k$可以由$\phi(x_i)$表示</p>
+<p><strong>其次</strong>在两边同时乘以向量$\phi(x_k)^T$<br>\begin{align}<br>\lambda_k u_k &amp;=Cu_k \\<br>\lambda_k u_k &amp;= \left( \frac{1}{N}\sum_{i=1}^N \phi(x_i)\phi(x_i)^T \right)u_k \\<br>\Rightarrow\lambda_k \phi(x_k) u_k &amp;=\phi(x_k) \left( \frac{1}{N}\sum_{i=1}^N \phi(x_i)\phi(x_i)^T \right)u_k<br>\end{align}</p>
+<p><strong>最后</strong>再将得到的$u_k=\sum_{j=1}^N \alpha_j^k \phi(x_j)$展开(<strong>注意下标</strong>)<br>\begin{align}<br>\lambda_k \phi(x_k)^T \sum_{i=1}^N \alpha_i^k \phi(x_i) &amp;=\phi(x_k)^T \left( \frac{1}{N}\sum_{i=1}^N \phi(x_i)\phi(x_i)^T \right)\sum_{j=1}^N \alpha_j^k \phi(x_j) \\<br>\Rightarrow \lambda_k N \sum_{i=1}^N \alpha_i^k \phi(x_k)^T\phi(x_i) &amp;=\sum_{i=1}^N \phi(x_k)^T\phi(x_i) \sum_{j=1}^N \alpha_j^k \phi(x_i)^T\phi(x_j) \\<br>\Rightarrow \lambda_k N \sum_{i=1}^N \alpha_i^k K_{ij} &amp;=\sum_{i=1}^N K_{ki} \sum_{j=1}^N \alpha_j^k K_{ij}<br>\end{align}</p>
+<p>其中$K_{ij}=\phi(x_i)^T\phi(x_j)$。<br>由于这里$\forall k \in {1,…,n}$都成立，故得到<br>\begin{align}<br>\lambda_k N K \alpha^k &amp;=K^2 \alpha^k \\<br>\Rightarrow K\alpha^k &amp;=\widehat{\lambda}_k\alpha^k<br>\end{align}</p>
+<p>其中$\widehat{\lambda}_k=\lambda_k N$(这里我推导了很久，要仔细注意等式$\forall k \in {1,…,n}$都成立就明白了)。<br>显然我们似乎已经获得了我们想要的结论：矩阵$K$的元素$K_{ij}$是由映射后的数据$\phi(x_i)$和$\phi(x_j)$的内积得到的，而核函数作用恰好体现在这里，所以紧接着的需要做的事情就是如何求矩阵$K$了。</p>
+<h3 id="Centering高维空间的数据"><a href="#Centering高维空间的数据" class="headerlink" title="Centering高维空间的数据"></a><strong>Centering高维空间的数据</strong></h3><p>假设$\phi_i = \phi(x_i)$，$\phi_i^C = \phi_i – \frac{1}{N}\sum_{k=1}^N \phi_k$，得：<br>\begin{align}<br>K_{ij}^C<br>&amp;= \phi_i^C \cdot \phi_j^C \\<br>&amp;= (\phi_i – \frac{1}{N}\sum_{k=1}^N \phi_k)^T (\phi_j – \frac{1}{N}\sum_{l=1}^N \phi_l ） \\<br>&amp;=\phi_i^T\phi_j – \frac{1}{N}\sum_{l=1}^N \phi_i^T \phi_l – \frac{1}{N}\sum_{k=1}^N \phi_k^T \phi_j + \frac{1}{N^2}\sum_{k=1}^N \sum_{l=1}^N \phi_k^T \phi_l \\<br>&amp;=K_{ij} –\frac{1}{N}\sum_{l=1}^N K_{il} – \frac{1}{N}\sum_{k=1}^N K_{kj} +  \frac{1}{N^2}\sum_{k=1}^N \sum_{l=1}^N K_{kl}<br>\end{align}</p>
+<p>这样，就完成了高纬空间数据的中心化。</p>
+<h3 id="数据投影"><a href="#数据投影" class="headerlink" title="数据投影"></a><strong>数据投影</strong></h3><p>与<strong>原始PCA</strong>相似，利用特征方程$K\alpha^k =\widehat{\lambda}_k\alpha^k$求得特征值和特征向量，并选择其中的一部分即可做降维。但是有些许不同是在最后数据投影时依然使用了内积，具体过程如下：<br>矩阵$K$的特征值$\widehat{\lambda}_k$和特征向量$\alpha^k$相对应，选取其中$t$个组成投影矩阵$\alpha$<br>$$\alpha=(\alpha^1,…,\alpha^t)^T$$</p>
+<p>原始数据$x_i$降维后的结果等于$\phi(x_i)$在$\alpha$上的投影<br>\begin{align}<br>\alpha\phi(x_i)^T &amp;=(\alpha^1,…,\alpha^t)^T \phi(x_i)\\<br>&amp;=\left(\sum_{j=1}^N \alpha_j^1 \phi(x_j)^T \phi(x_i),…,\sum_{l=1}^N \alpha_l^t \phi(x_l)^T \phi(x_i)\right) \\<br>&amp;=\left(\sum_{j=1}^N \alpha_j^k K_{ji},…,\sum_{l=1}^N \alpha_l^t K_{li}\right)<br>\end{align}</p>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a><strong>实验</strong></h1><p>占座用，以后补充。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>[6] <a href="http://www.ics.uci.edu/~welling/classnotes/papers\_class/Kernel-PCA.pdf" target="_blank" rel="external">Max Wellings’s notes for Kernel Principal Component Analaysis</a><br>[7] <a href="http://www.cnki.net/KCMS/detail/detail.aspx?QueryID=0&amp;CurRec=2&amp;recid=&amp;filename=2010081962.nh&amp;dbname=CMFD2011&amp;dbcode=CMFD&amp;pr=&amp;urlid=&amp;yx=&amp;v=MDIzMDZZUzdEaDFUM3FUcldNMUZyQ1VSTHlmWStkdkZ5L25WcnZMVjEyNkhyT3dIOWpLclpFYlBJUjhlWDFMdXg=" target="_blank" rel="external">核PCA特征提取方法及其应用研究_高绪伟</a></p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Dimensionality-Reduction/" rel="tag">#Dimensionality Reduction</a>
+          
+            <a href="/tags/KPCA/" rel="tag">#KPCA</a>
+          
+            <a href="/tags/Machine-Learning/" rel="tag">#Machine Learning</a>
+          
+            <a href="/tags/PCA/" rel="tag">#PCA</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/15/09-em-algorithm/" rel="next" title="EM算法">
+                <i class="fa fa-chevron-left"></i> EM算法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/19/11-bp-algorithm/" rel="prev" title="BP算法">
+                BP算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="Winters" />
+          <p class="site-author-name" itemprop="name">Winters</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主成分分析的背景来源"><span class="nav-number">2.</span> <span class="nav-text">主成分分析的背景来源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PCA的理论基础"><span class="nav-number">3.</span> <span class="nav-text">PCA的理论基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#符号说明"><span class="nav-number">3.1.</span> <span class="nav-text">符号说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最大方差解释"><span class="nav-number">3.2.</span> <span class="nav-text">最大方差解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小平方误差解释"><span class="nav-number">3.3.</span> <span class="nav-text">最小平方误差解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他说明"><span class="nav-number">3.4.</span> <span class="nav-text">其他说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kernel-PCA"><span class="nav-number">4.</span> <span class="nav-text">Kernel PCA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-PCA的理论基础"><span class="nav-number">4.1.</span> <span class="nav-text">Kernel PCA的理论基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用核函数来在高维空间做PCA"><span class="nav-number">4.1.1.</span> <span class="nav-text">使用核函数来在高维空间做PCA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Centering高维空间的数据"><span class="nav-number">4.1.2.</span> <span class="nav-text">Centering高维空间的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据投影"><span class="nav-number">4.1.3.</span> <span class="nav-text">数据投影</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验"><span class="nav-number">5.</span> <span class="nav-text">实验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Winters</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
